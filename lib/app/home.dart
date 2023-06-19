@@ -16,6 +16,7 @@ class HomePage extends StatelessWidget {
       ),
       body: Center(
         child: Wrap(
+          spacing: 10,
           children: [
             FilledButton.tonal(
               onPressed: () => _onPressed(context, Routes.example0),
