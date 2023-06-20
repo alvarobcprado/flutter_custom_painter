@@ -42,7 +42,7 @@ class Example0 extends StatelessWidget {
 }
 
 class Example0Painter extends CustomPainter {
-  final line = Path()
+  final linePath = Path()
     ..moveTo(50, 50)
     ..lineTo(100, 100)
     ..lineTo(150, 50);
@@ -56,9 +56,22 @@ class Example0Painter extends CustomPainter {
     ..strokeCap = StrokeCap.round
     ..strokeWidth = 10;
 
+  final fillPainter = Paint()
+    ..color = Colors.blue
+    ..style = PaintingStyle.fill;
+
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawPath(line, painter);
+    final center = Offset(size.width / 2, size.height / 2);
+    final secondLinePath = Path()
+      ..moveTo(center.dx - 100, center.dy)
+      ..lineTo(center.dx, center.dy + 50)
+      ..lineTo(center.dx + 100, center.dy)
+      ..lineTo(center.dx, center.dy - 50)
+      ..lineTo(center.dx - 100, center.dy);
+
+    canvas.drawPath(linePath, painter);
+    canvas.drawPath(secondLinePath, fillPainter);
   }
 
   @override
