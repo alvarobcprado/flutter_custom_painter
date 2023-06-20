@@ -11,15 +11,9 @@ class SizedPainterBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: sideSize,
       height: sideSize,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.red,
-          width: 5,
-        ),
-      ),
       child: CustomPaint(
         size: Size.square(sideSize),
         painter: SizedPainterBoxPainter(),
@@ -33,16 +27,18 @@ class SizedPainterBoxPainter extends CustomPainter {
   final painter = Paint()
     ..color = Colors.red
     ..style = PaintingStyle.stroke
-    ..strokeWidth = 2;
+    ..strokeWidth = 1;
 
   Paragraph _getOffsetParagraphBuilder(Offset offset) {
     final paragraphBuilder = ParagraphBuilder(
       ParagraphStyle(),
     )
-      ..pushStyle(const TextStyle(
-        color: Colors.black,
-        fontSize: 20,
-      ).getTextStyle())
+      ..pushStyle(
+        const TextStyle(
+          color: Colors.black,
+          fontSize: 20,
+        ).getTextStyle(),
+      )
       ..addText('X: ${offset.dx} Y: ${offset.dy}');
 
     final paragraph = paragraphBuilder.build()
