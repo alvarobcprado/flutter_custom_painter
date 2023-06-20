@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_painter/app/core/sized_painter_box.dart';
 
@@ -39,7 +41,7 @@ class Example1Painter extends CustomPainter {
     ..style = PaintingStyle.stroke
     ..strokeJoin = StrokeJoin.round
     ..strokeCap = StrokeCap.round
-    ..strokeWidth = 10;
+    ..strokeWidth = 5;
 
   void _drawLine(Canvas canvas) {
     const lineP1 = Offset(50, 50);
@@ -65,16 +67,16 @@ class Example1Painter extends CustomPainter {
 
   void _drawOval(Canvas canvas) {
     final ovalRect = Rect.fromPoints(
-      const Offset(50, 150),
-      const Offset(150, 200),
+      const Offset(400, 150),
+      const Offset(500, 200),
     );
     canvas.drawOval(ovalRect, painter);
   }
 
   void _drawShapePath(Canvas canvas) {
     final shapeRect = Rect.fromPoints(
-      const Offset(50, 250),
-      const Offset(150, 300),
+      const Offset(50, 150),
+      const Offset(150, 200),
     );
     final shapePath = Path()
       ..addOval(shapeRect)
@@ -84,30 +86,75 @@ class Example1Painter extends CustomPainter {
 
   void _drawPolygon(Canvas canvas) {
     final polygonPoints = [
-      const Offset(250, 250),
-      const Offset(350, 250),
-      const Offset(300, 300),
-      const Offset(200, 300),
+      const Offset(250, 150),
+      const Offset(350, 150),
+      const Offset(300, 200),
+      const Offset(200, 200),
     ];
     final polygonPath = Path()..addPolygon(polygonPoints, true);
     canvas.drawPath(polygonPath, painter);
   }
 
+  void _drawPizzaShape(Canvas canvas) {
+    final bluePaint = Paint()
+      ..color = Colors.blue
+      ..strokeWidth = 1
+      ..style = PaintingStyle.fill;
+
+    final redPaint = Paint()
+      ..color = Colors.red
+      ..style = PaintingStyle.fill;
+
+    const center = Offset(100, 400);
+    const radius = 50.0;
+
+    const double sliceAngle = 2 * pi / 12;
+
+    for (int i = 0; i < 12; i++) {
+      final startAngle = i * sliceAngle;
+
+      canvas.drawArc(
+        Rect.fromCircle(center: center, radius: radius),
+        startAngle,
+        sliceAngle,
+        true,
+        i.isEven ? redPaint : bluePaint,
+      );
+    }
+  }
+
   void _drawBlendMode(Canvas canvas) {
-    var centerBlue = const Offset(100 - 20, 400);
-    var radius = 50.0;
-    var paintBlue = Paint()
+    const centerBlue = Offset(300 - 20, 400);
+    const radius = 50.0;
+    final paintBlue = Paint()
+      ..colorFilter = const ColorFilter.mode(Colors.blue, BlendMode.dstATop)
       ..color = Colors.blue
       ..style = PaintingStyle.fill;
 
-    var centerRed = const Offset(100 + 40, 400);
-    var paintRed = Paint()
+    const centerRed = Offset(300 + 20, 400);
+    final paintRed = Paint()
       ..color = Colors.red
-      ..style = PaintingStyle.fill
-      ..blendMode = BlendMode.hue;
+      ..style = PaintingStyle.fill;
 
-    canvas.drawCircle(centerBlue, radius, paintBlue);
-    canvas.drawCircle(centerRed, radius, paintRed);
+    final redPath = Path()
+      ..addOval(Rect.fromCircle(center: centerRed, radius: radius));
+
+    final bluePath = Path()
+      ..addOval(Rect.fromCircle(center: centerBlue, radius: radius));
+
+    canvas.drawPath(bluePath, paintBlue);
+    canvas.drawPath(redPath, paintRed);
+
+    final intersectionPath = Path.combine(
+      PathOperation.intersect,
+      redPath,
+      bluePath,
+    );
+
+    canvas.drawPath(
+      intersectionPath,
+      Paint()..color = Colors.white,
+    );
   }
 
   @override
@@ -116,8 +163,9 @@ class Example1Painter extends CustomPainter {
     _drawRect(canvas);
     _drawRRect(canvas);
     _drawOval(canvas);
-    _drawShapePath(canvas);
     _drawPolygon(canvas);
+    _drawShapePath(canvas);
+    _drawPizzaShape(canvas);
     _drawBlendMode(canvas);
   }
 
