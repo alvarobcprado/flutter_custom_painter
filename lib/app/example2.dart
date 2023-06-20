@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_painter/app/core/sized_painter_box.dart';
 
 class Example2 extends StatelessWidget {
   const Example2({super.key});
@@ -10,9 +11,12 @@ class Example2 extends StatelessWidget {
         title: const Text('Example2'),
       ),
       body: Center(
-        child: CustomPaint(
-          size: Size.square(size.width * 0.5),
-          painter: Example2Painter(),
+        child: SizedPainterBox(
+          sideSize: size.width * 0.8,
+          child: CustomPaint(
+            size: Size.square(size.width * 0.5),
+            painter: Example2Painter(),
+          ),
         ),
       ),
     );

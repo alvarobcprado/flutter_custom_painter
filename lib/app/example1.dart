@@ -65,6 +65,12 @@ class Example1Painter extends CustomPainter {
     canvas.drawRRect(roundedRectangle, painter);
   }
 
+  void _drawCircle(Canvas canvas) {
+    const center = Offset(450, 75);
+    const radius = 30.0;
+    canvas.drawCircle(center, radius, painter);
+  }
+
   void _drawOval(Canvas canvas) {
     final ovalRect = Rect.fromPoints(
       const Offset(400, 150),
@@ -98,7 +104,6 @@ class Example1Painter extends CustomPainter {
   void _drawPizzaShape(Canvas canvas) {
     final bluePaint = Paint()
       ..color = Colors.blue
-      ..strokeWidth = 1
       ..style = PaintingStyle.fill;
 
     final redPaint = Paint()
@@ -123,11 +128,10 @@ class Example1Painter extends CustomPainter {
     }
   }
 
-  void _drawBlendMode(Canvas canvas) {
+  void _drawDoubleMoon(Canvas canvas) {
     const centerBlue = Offset(300 - 20, 400);
     const radius = 50.0;
     final paintBlue = Paint()
-      ..colorFilter = const ColorFilter.mode(Colors.blue, BlendMode.dstATop)
       ..color = Colors.blue
       ..style = PaintingStyle.fill;
 
@@ -163,10 +167,11 @@ class Example1Painter extends CustomPainter {
     _drawRect(canvas);
     _drawRRect(canvas);
     _drawOval(canvas);
+    _drawCircle(canvas);
     _drawPolygon(canvas);
     _drawShapePath(canvas);
     _drawPizzaShape(canvas);
-    _drawBlendMode(canvas);
+    _drawDoubleMoon(canvas);
   }
 
   @override
