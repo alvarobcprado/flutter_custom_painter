@@ -50,7 +50,7 @@ class Example0Painter extends CustomPainter {
     ..strokeWidth = 10;
 
   final fillPainter = Paint()
-    ..color = Colors.blue
+    ..color = Colors.red
     ..style = PaintingStyle.fill;
 
   final linePath = Path()
