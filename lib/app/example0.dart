@@ -42,13 +42,6 @@ class Example0 extends StatelessWidget {
 }
 
 class Example0Painter extends CustomPainter {
-  final linePath = Path()
-    ..moveTo(50, 50)
-    ..lineTo(100, 100)
-    ..lineTo(150, 50);
-  // ..relativeLineTo(50, 50)
-  // ..relativeLineTo(50, -50);
-
   final painter = Paint()
     ..color = Colors.blue
     ..style = PaintingStyle.stroke
@@ -59,6 +52,13 @@ class Example0Painter extends CustomPainter {
   final fillPainter = Paint()
     ..color = Colors.blue
     ..style = PaintingStyle.fill;
+
+  final linePath = Path()
+    ..moveTo(50, 50)
+    ..lineTo(100, 100)
+    ..lineTo(150, 50)
+    ..relativeLineTo(50, 50)
+    ..relativeLineTo(50, -50);
 
   @override
   void paint(Canvas canvas, Size size) {
