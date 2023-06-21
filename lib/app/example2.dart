@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_painter/app/core/sized_painter_box.dart';
 
+// Baseado em: https://medium.com/flutter-community/flutter-custom-painter-circular-wave-animation-bdc65c112690
 class Example2 extends StatefulWidget {
   const Example2({super.key});
 
@@ -16,7 +17,7 @@ class _Example2State extends State<Example2> with TickerProviderStateMixin {
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 1000),
     )..repeat();
   }
 
@@ -36,17 +37,26 @@ class _Example2State extends State<Example2> with TickerProviderStateMixin {
       body: Center(
         child: SizedPainterBox(
           sideSize: size.width * 0.8,
-          child: CustomPaint(
-            size: Size.square(size.width * 0.5),
-            painter: Example2Painter(
-              animation: _animationController,
-            ),
-            child: const Center(
-              child: Text(
-                'Example2',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+          child: GestureDetector(
+            onTap: () {
+              if (_animationController.isAnimating) {
+                _animationController.stop();
+              } else {
+                _animationController.repeat();
+              }
+            },
+            child: CustomPaint(
+              size: Size.square(size.width * 0.5),
+              painter: Example2Painter(
+                animation: _animationController,
+              ),
+              child: const Center(
+                child: Text(
+                  'Example2',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
@@ -77,7 +87,12 @@ class Example2Painter extends CustomPainter {
     double maxRadius = centerX;
 
     var currentRadius = waveRadius;
-    while (currentRadius < maxRadius) {
+    while (currentRadius <= maxRadius) {
+      final waveOpacity = 1.0 - (currentRadius / maxRadius);
+      final waveStrokeWidth = (waveOpacity * 5.0);
+      wavePaint.strokeWidth = waveStrokeWidth;
+      wavePaint.color = Colors.blue.withOpacity(waveOpacity);
+
       canvas.drawCircle(Offset(centerX, centerY), currentRadius, wavePaint);
       currentRadius += 10.0;
     }
@@ -86,5 +101,13 @@ class Example2Painter extends CustomPainter {
   @override
   bool shouldRepaint(Example2Painter oldDelegate) {
     return oldDelegate.waveRadius != waveRadius;
+  }
+
+  @override
+  bool hitTest(Offset position) {
+    if (position.dx >= 0 && position.dx <= 100) {
+      return true;
+    }
+    return false;
   }
 }

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_painter/app/core/sized_painter_box.dart';
 
+// Baseado em: https://getstream.io/blog/definitive-flutter-painting-guide
 class Example1 extends StatelessWidget {
   const Example1({super.key});
 

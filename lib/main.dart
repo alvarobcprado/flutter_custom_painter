@@ -16,6 +16,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Flutter Custom Painter',
+      showPerformanceOverlay: false,
       debugShowCheckedModeBanner: false,
       onGenerateRoute: Routes.onGenerateRoute,
     );
