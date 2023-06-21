@@ -162,7 +162,7 @@ class Example1Painter extends CustomPainter {
     );
   }
 
-  void _drawBezierCurve(Canvas canvas, Size size) {
+  void _drawCurve(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = Colors.blue
       ..style = PaintingStyle.fill
@@ -173,16 +173,18 @@ class Example1Painter extends CustomPainter {
         Rect.fromLTWH(0, 0, size.width, size.height),
       );
 
+    const x0 = 0.0;
+    final y0 = size.height * 0.9;
+    final x1 = size.width * 0.2;
+    final y1 = size.height * 0.8;
+    final x2 = size.width * 0.8;
+    final y2 = size.height;
+    final x3 = size.width;
+    final y3 = size.height * 0.9;
+
     final path = Path()
-      ..moveTo(0, size.height * 0.9)
-      ..cubicTo(
-        size.width * 0.2,
-        size.height * 0.8,
-        size.width * 0.8,
-        size.height,
-        size.width,
-        size.height * 0.9,
-      )
+      ..moveTo(x0, y0)
+      ..cubicTo(x1, y1, x2, y2, x3, y3)
       ..lineTo(size.width, size.height)
       ..lineTo(0, size.height)
       ..close();
@@ -201,7 +203,7 @@ class Example1Painter extends CustomPainter {
     _drawShapePath(canvas);
     _drawPizzaShape(canvas);
     _drawDoubleMoon(canvas);
-    _drawBezierCurve(canvas, size);
+    _drawCurve(canvas, size);
   }
 
   @override
