@@ -114,9 +114,10 @@ class Example1Painter extends CustomPainter {
     const center = Offset(100, 400);
     const radius = 50.0;
 
-    const double sliceAngle = 2 * pi / 12;
+    const double sliceCount = 12;
+    const double sliceAngle = 2 * pi / sliceCount;
 
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < sliceCount; i++) {
       final startAngle = i * sliceAngle;
 
       canvas.drawArc(
