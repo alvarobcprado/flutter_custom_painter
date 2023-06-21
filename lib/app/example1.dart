@@ -162,6 +162,34 @@ class Example1Painter extends CustomPainter {
     );
   }
 
+  void _drawBezierCurve(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.blue
+      ..style = PaintingStyle.fill
+      ..maskFilter = const MaskFilter.blur(BlurStyle.solid, 10)
+      ..shader = const LinearGradient(
+        colors: [Colors.blue, Colors.red],
+      ).createShader(
+        Rect.fromLTWH(0, 0, size.width, size.height),
+      );
+
+    final path = Path()
+      ..moveTo(0, size.height * 0.9)
+      ..cubicTo(
+        size.width * 0.2,
+        size.height * 0.8,
+        size.width * 0.8,
+        size.height,
+        size.width,
+        size.height * 0.9,
+      )
+      ..lineTo(size.width, size.height)
+      ..lineTo(0, size.height)
+      ..close();
+
+    canvas.drawPath(path, paint);
+  }
+
   @override
   void paint(Canvas canvas, Size size) {
     _drawLine(canvas);
@@ -173,6 +201,7 @@ class Example1Painter extends CustomPainter {
     _drawShapePath(canvas);
     _drawPizzaShape(canvas);
     _drawDoubleMoon(canvas);
+    _drawBezierCurve(canvas, size);
   }
 
   @override
