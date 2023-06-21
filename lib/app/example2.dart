@@ -100,7 +100,7 @@ class Example2Painter extends CustomPainter {
 
   @override
   bool shouldRepaint(Example2Painter oldDelegate) {
-    return oldDelegate.waveRadius != waveRadius;
+    return oldDelegate.animation != animation;
   }
 
   @override
