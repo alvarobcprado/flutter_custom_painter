@@ -70,15 +70,15 @@ class _Example2State extends State<Example2> with TickerProviderStateMixin {
 class Example2Painter extends CustomPainter {
   Example2Painter({required this.animation}) : super(repaint: animation);
   final Animation animation;
-  final int waveGap = 10;
+
+  static const double waveGap = 10.0;
 
   final wavePaint = Paint()
     ..color = Colors.black
     ..style = PaintingStyle.stroke
-    ..strokeWidth = 2.0
     ..isAntiAlias = true;
 
-  double get waveRadius => 10.0 * animation.value;
+  double get waveRadius => waveGap * animation.value;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -94,7 +94,7 @@ class Example2Painter extends CustomPainter {
       wavePaint.color = Colors.blue.withOpacity(waveOpacity);
 
       canvas.drawCircle(Offset(centerX, centerY), currentRadius, wavePaint);
-      currentRadius += 10.0;
+      currentRadius += waveGap;
     }
   }
 
