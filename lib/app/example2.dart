@@ -76,6 +76,7 @@ class Example2Painter extends CustomPainter {
   final wavePaint = Paint()
     ..color = Colors.black
     ..style = PaintingStyle.stroke
+    ..color = Colors.blue
     ..isAntiAlias = true;
 
   double get waveRadius => waveGap * animation.value;
@@ -91,7 +92,7 @@ class Example2Painter extends CustomPainter {
       final waveOpacity = 1.0 - (currentRadius / maxRadius);
       final waveStrokeWidth = (waveOpacity * 5.0);
       wavePaint.strokeWidth = waveStrokeWidth;
-      wavePaint.color = Colors.blue.withOpacity(waveOpacity);
+      wavePaint.color = wavePaint.color.withOpacity(waveOpacity);
 
       canvas.drawCircle(Offset(centerX, centerY), currentRadius, wavePaint);
       currentRadius += waveGap;
