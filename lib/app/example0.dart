@@ -56,9 +56,9 @@ class Example0Painter extends CustomPainter {
   final linePath = Path()
     ..moveTo(50, 50)
     ..lineTo(100, 100)
-    ..lineTo(150, 50)
-    ..relativeLineTo(50, 50)
-    ..relativeLineTo(50, -50);
+    ..lineTo(150, 50);
+  // ..relativeLineTo(50, 50)
+  // ..relativeLineTo(50, -50);
 
   @override
   void paint(Canvas canvas, Size size) {
