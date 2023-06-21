@@ -30,6 +30,10 @@ class HomePage extends StatelessWidget {
               onPressed: () => _onPressed(context, Routes.example2),
               child: const Text('Example2'),
             ),
+            FilledButton.tonal(
+              onPressed: () => _onPressed(context, Routes.example3),
+              child: const Text('Example3'),
+            ),
           ],
         ),
       ),
