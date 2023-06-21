@@ -131,16 +131,16 @@ class Example1Painter extends CustomPainter {
   }
 
   void _drawDoubleMoon(Canvas canvas) {
-    const centerBlue = Offset(300 - 20, 400);
-    const radius = 50.0;
     final paintBlue = Paint()
       ..color = Colors.blue
       ..style = PaintingStyle.fill;
-
-    const centerRed = Offset(300 + 20, 400);
     final paintRed = Paint()
       ..color = Colors.red
       ..style = PaintingStyle.fill;
+
+    const centerBlue = Offset(300 - 20, 400);
+    const centerRed = Offset(300 + 20, 400);
+    const radius = 50.0;
 
     final redPath = Path()
       ..addOval(Rect.fromCircle(center: centerRed, radius: radius));
